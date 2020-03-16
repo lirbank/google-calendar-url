@@ -10,6 +10,12 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "google-calendar",
+    "google-calendar-api",
+    "calendar",
+    "typescript"
+  ],
   "scripts": {
     "prepublishOnly": "yarn compile",
     "compile": "tsc",

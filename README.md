@@ -9,7 +9,7 @@ Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
 ```sh
 yarn add google-calendar-url
 # or
-npm install add google-calendar-url --save
+npm install google-calendar-url --save
 ```
 
 ## Usage

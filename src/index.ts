@@ -10,9 +10,9 @@ function clean(obj: Record<string, string | undefined>) {
   );
 }
 
-const datePattern = /^\d{8}(T\d{6}(Z)?)?$/;
+const datePattern = /^\d{8}(T\d{6}Z?)?$/;
 
-export interface GoogleCalendarEventUrlArgs {
+export interface GoogleCalendarEventArgs {
   /**
    * Start of event, acceptable formats are:
    *
@@ -48,7 +48,7 @@ export interface GoogleCalendarEventUrlArgs {
 /**
  * Generate a Google Calendar event URL
  */
-export function googleCalendarEventUrl(args: GoogleCalendarEventUrlArgs) {
+export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
   const { start, end, title, ...rest } = args;
 
   if (start && !end) {

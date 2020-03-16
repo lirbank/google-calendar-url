@@ -11,10 +11,35 @@ function clean(obj: Record<string, string | undefined>) {
 }
 
 export interface GoogleCalendarEventUrlArgs {
+  /**
+   * Start of event, acceptable formats are:
+   *
+   * 20200316T010000Z - UTC
+   *
+   * 20200316T010000 - Time local to the user
+   *
+   * 20200316 - All day event
+   */
   start: string;
+
+  /**
+   * End of event, acceptable formats are:
+   *
+   * 20200316T010000Z - UTC
+   *
+   * 20200316T010000 - Time local to the user
+   *
+   * 20200316 - All day event
+   */
   end: string;
+
+  /** Event title */
   text?: string;
+
+  /** Event location */
   location?: string;
+
+  /** Event details */
   details?: string;
 }
 

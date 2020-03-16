@@ -1,6 +1,8 @@
 # google-calendar-url
 
-Generate shareable URLs for adding Google Calendar events
+Generate shareable URLs for adding Google Calendar events.
+
+Written in TypeScript and includes type definitions.
 
 Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
 
@@ -19,12 +21,18 @@ import { googleCalendarEventUrl } from 'google-calendar-url';
 
 const url = googleCalendarEventUrl({
   start: '20201212T100000Z',
-  end: '20201212T100000Z',
+  end: '20201212T110000Z',
   title: 'Event title',
   details: 'Event details',
   location: 'San Francisco',
 });
+
+console.log(url);
+
+// https://calendar.google.com/calendar/event?action=TEMPLATE&dates=20201212T100000Z%2F20201212T110000Z&text=Event+title&details=Event+details&location=San+Francisco
 ```
+
+[Try the URL ](https://calendar.google.com/calendar/event?action=TEMPLATE&dates=20201212T100000Z%2F20201212T110000Z&text=Event+title&details=Event+details&location=San+Francisco)
 
 ## API
 

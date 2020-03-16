@@ -6,6 +6,9 @@
   "repository": "https://github.com/lirbank/google-calendar-url.git",
   "author": "Mikael Lirbank",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "yarn compile",
     "compile": "tsc",

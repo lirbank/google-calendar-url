@@ -7,6 +7,7 @@
   "author": "Mikael Lirbank",
   "license": "MIT",
   "scripts": {
+    "prepublishOnly": "yarn compile",
     "compile": "tsc",
     "compile:watch": "tsc --watch",
     "test": "jest",

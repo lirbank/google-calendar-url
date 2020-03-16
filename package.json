@@ -1,6 +1,6 @@
 {
   "name": "google-calendar-url",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate shareable URLs for adding Google Calendar events",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

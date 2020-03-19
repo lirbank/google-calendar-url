@@ -2,7 +2,14 @@
 
 Generate shareable URLs for adding Google Calendar events.
 
+## Features
+
 Written in TypeScript and includes type definitions.
+
+- No dependencies
+- Works with vanilla JavaScript and
+  [TypeScript](https://www.typescriptlang.org/)
+- Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
 

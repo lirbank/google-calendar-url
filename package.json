@@ -32,7 +32,7 @@
     "@babel/preset-env": "7.9.0",
     "@babel/preset-typescript": "7.9.0",
     "@types/jest": "25.1.4",
-    "babel-jest": "25.1.0",
+    "babel-jest": "26.0.0",
     "jest": "25.1.0",
     "prettier": "2.0.2",
     "tslib": "1.11.1",

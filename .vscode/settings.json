@@ -1,11 +1,10 @@
 {
-  "editor.rulers": [80],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "files.trimTrailingWhitespace": true,
-  "files.trimFinalNewlines": true,
+  "editor.rulers": [80],
   "files.insertFinalNewline": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "npm.packageManager": "yarn"
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "npm.packageManager": "bun",
+  "search.exclude": { "**/bun.lock": true }
 }

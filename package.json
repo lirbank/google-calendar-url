@@ -23,9 +23,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prettier": "prettier --list-different \"**/*.{ts,json,md}\"",
-    "prettier:fix": "prettier --write \"**/*.{ts,json,md}\"",
-    "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint --ext .ts --fix src/"
+    "prettier:fix": "prettier --write \"**/*.{ts,json,md}\""
   },
   "devDependencies": {
     "@babel/core": "7.10.2",

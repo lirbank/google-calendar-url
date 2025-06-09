@@ -25,14 +25,14 @@ npm install google-calendar-url --save
 ## Usage
 
 ```ts
-import { googleCalendarEventUrl } from 'google-calendar-url';
+import { googleCalendarEventUrl } from "google-calendar-url";
 
 const url = googleCalendarEventUrl({
-  start: '20201212T100000Z',
-  end: '20201212T110000Z',
-  title: 'Event title',
-  details: 'Event details',
-  location: 'San Francisco',
+  start: "20201212T100000Z",
+  end: "20201212T110000Z",
+  title: "Event title",
+  details: "Event details",
+  location: "San Francisco",
 });
 
 console.log(url);

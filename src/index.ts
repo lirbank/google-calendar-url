@@ -6,7 +6,7 @@ function clean(obj: Record<string, string | undefined>) {
     (acc, [key, val]) => {
       return val ? { ...acc, [key]: val } : acc;
     },
-    {},
+    {}
   );
 }
 
@@ -52,27 +52,27 @@ export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
   const { start, end, title, ...rest } = args;
 
   if (start && !end) {
-    throw new Error('`end` is required when `start` is provided');
+    throw new Error("`end` is required when `start` is provided");
   }
 
   if (!start && end) {
-    throw new Error('`start` is required when `end` is provided');
+    throw new Error("`start` is required when `end` is provided");
   }
 
   if (start && !datePattern.test(start)) {
-    throw new Error('`start` is malformed');
+    throw new Error("`start` is malformed");
   }
 
   if (end && !datePattern.test(end)) {
-    throw new Error('`end` is malformed');
+    throw new Error("`end` is malformed");
   }
 
   if (start && end && start.length !== end.length) {
-    throw new Error('`start` and `end` should be of the same format`');
+    throw new Error("`start` and `end` should be of the same format`");
   }
 
   const searchParams = {
-    action: 'TEMPLATE',
+    action: "TEMPLATE",
     dates: start && end ? `${start}/${end}` : undefined,
     text: title,
     ...rest,
@@ -81,6 +81,6 @@ export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
   const urlSearchParams = new URLSearchParams(clean(searchParams));
 
   return (
-    'https://calendar.google.com/calendar/event?' + urlSearchParams.toString()
+    "https://calendar.google.com/calendar/event?" + urlSearchParams.toString()
   );
 }

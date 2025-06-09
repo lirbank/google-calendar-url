@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { googleCalendarEventUrl } from '.';
 
 const baseUrl = 'https://calendar.google.com/calendar/event?';

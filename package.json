@@ -20,8 +20,7 @@
     "prepublishOnly": "yarn compile",
     "compile": "tsc",
     "compile:watch": "tsc --watch",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "vitest",
     "prettier": "prettier --list-different \"**/*.{ts,json,md}\"",
     "prettier:fix": "prettier --write \"**/*.{ts,json,md}\""
   },
@@ -29,11 +28,9 @@
     "@babel/core": "7.10.2",
     "@babel/preset-env": "7.10.2",
     "@babel/preset-typescript": "7.10.1",
-    "@types/jest": "25.2.3",
-    "babel-jest": "26.0.1",
-    "jest": "26.0.1",
     "prettier": "2.0.5",
     "tslib": "2.0.0",
-    "typescript": "3.9.5"
+    "typescript": "3.9.5",
+    "vitest": "^3.2.3"
   }
 }

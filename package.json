@@ -16,7 +16,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map"
   ],
   "scripts": {
     "test": "vitest",

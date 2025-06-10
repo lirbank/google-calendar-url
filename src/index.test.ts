@@ -22,6 +22,7 @@ test("with start and end", () => {
       "details=Details+and+details",
     ].join("&");
 
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -44,6 +45,7 @@ test("local time", () => {
       "details=Details+and+details",
     ].join("&");
 
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -66,6 +68,7 @@ test("all day", () => {
       "details=Details+and+details",
     ].join("&");
 
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -79,6 +82,8 @@ test("with empty values", () => {
   });
 
   const expected = baseUrl + ["action=TEMPLATE"].join("&");
+
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -92,6 +97,8 @@ test("with undefined values", () => {
   });
 
   const expected = baseUrl + ["action=TEMPLATE"].join("&");
+
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -99,6 +106,8 @@ test("without values", () => {
   const eventUrl = googleCalendarEventUrl({});
 
   const expected = baseUrl + ["action=TEMPLATE"].join("&");
+
+  console.log(eventUrl);
   expect(eventUrl).toBe(expected);
 });
 
@@ -108,6 +117,7 @@ test("without values", () => {
 
 test("only start date should fail", () => {
   expect(() =>
+    // @ts-expect-error - Testing runtime validation for invalid input
     googleCalendarEventUrl({
       start: "20200221",
     })
@@ -116,6 +126,7 @@ test("only start date should fail", () => {
 
 test("only end date should fail", () => {
   expect(() =>
+    // @ts-expect-error - Testing runtime validation for invalid input
     googleCalendarEventUrl({
       end: "20200222",
     })
@@ -155,5 +166,5 @@ test("mixed date formats should fail", () => {
       start: "20200321T010000Z",
       end: "20200325T010000",
     })
-  ).toThrow("`start` and `end` should be of the same format`");
+  ).toThrow("`start` and `end` must be in the same format");
 });

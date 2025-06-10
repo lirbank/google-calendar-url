@@ -12,44 +12,78 @@ function clean(obj: Record<string, string | undefined>) {
 
 const datePattern = /^\d{8}(T\d{6}Z?)?$/;
 
-export interface GoogleCalendarEventArgs {
-  /**
-   * Start of event, acceptable formats are:
-   *
-   * 20200316T010000Z - UTC
-   *
-   * 20200316T010000 - Time local to the user
-   *
-   * 20200316 - All day event
-   */
-  start?: string;
+export type GoogleCalendarEventArgs =
+  | {
+      /**
+       * Start of event, acceptable formats are:
+       *
+       * 20200316T010000Z - UTC
+       *
+       * 20200316T010000 - Time local to the user
+       *
+       * 20200316 - All day event
+       */
+      start: string;
 
-  /**
-   * End of event, acceptable formats are:
-   *
-   * 20200316T010000Z - UTC
-   *
-   * 20200316T010000 - Time local to the user
-   *
-   * 20200316 - All day event
-   */
-  end?: string;
+      /**
+       * End of event, acceptable formats are:
+       *
+       * 20200316T010000Z - UTC
+       *
+       * 20200316T010000 - Time local to the user
+       *
+       * 20200316 - All day event
+       */
+      end: string;
 
-  /** Event title */
-  title?: string;
+      /** Event title */
+      title?: string;
 
-  /** Event location */
-  location?: string;
+      /** Event location */
+      location?: string;
 
-  /** Event details */
-  details?: string;
-}
+      /** Event details */
+      details?: string;
+    }
+  | {
+      /**
+       * Start of event, acceptable formats are:
+       *
+       * 20200316T010000Z - UTC
+       *
+       * 20200316T010000 - Time local to the user
+       *
+       * 20200316 - All day event
+       */
+      start?: never;
+
+      /**
+       * End of event, acceptable formats are:
+       *
+       * 20200316T010000Z - UTC
+       *
+       * 20200316T010000 - Time local to the user
+       *
+       * 20200316 - All day event
+       */
+      end?: never;
+
+      /** Event title */
+      title?: string;
+
+      /** Event location */
+      location?: string;
+
+      /** Event details */
+      details?: string;
+    };
 
 /**
  * Generate a Google Calendar event URL
  */
 export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
-  const { start, end, title, ...rest } = args;
+  const start = "start" in args ? args.start : undefined;
+  const end = "end" in args ? args.end : undefined;
 
   if (start && !end) {
     throw new Error("`end` is required when `start` is provided");
@@ -68,14 +102,15 @@ export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
   }
 
   if (start && end && start.length !== end.length) {
-    throw new Error("`start` and `end` should be of the same format`");
+    throw new Error("`start` and `end` must be in the same format");
   }
 
   const searchParams = {
     action: "TEMPLATE",
     dates: start && end ? `${start}/${end}` : undefined,
-    text: title,
-    ...rest,
+    text: args.title,
+    location: args.location,
+    details: args.details,
   };
 
   const urlSearchParams = new URLSearchParams(clean(searchParams));

@@ -16,22 +16,23 @@ Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
 ## Installation
 
 ```sh
+bun add google-calendar-url
+pnpm add google-calendar-url
 yarn add google-calendar-url
-# or
 npm install google-calendar-url --save
 ```
 
 ## Usage
 
 ```ts
-import { googleCalendarEventUrl } from 'google-calendar-url';
+import { googleCalendarEventUrl } from "google-calendar-url";
 
 const url = googleCalendarEventUrl({
-  start: '20201212T100000Z',
-  end: '20201212T110000Z',
-  title: 'Event title',
-  details: 'Event details',
-  location: 'San Francisco',
+  start: "20201212T100000Z",
+  end: "20201212T110000Z",
+  title: "Event title",
+  details: "Event details",
+  location: "San Francisco",
 });
 
 console.log(url);
@@ -88,3 +89,26 @@ interface GoogleCalendarEventArgs {
 ## Maintainers
 
 - [@lirbank](https://github.com/lirbank)
+
+## Contributing
+
+Contributions are welcome! Please open issues or pull requests on
+[GitHub](https://github.com/starmode-base/neon-testing/pulls).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
+
+## Need expert help?
+
+I take on a few consulting projects each year where I can build, unblock, and
+ship.
+
+**[STΛR MODΞ](https://www.starmode.dev/)** — The AI development studio I run
+with AI/ML expert and data scientist Spencer Smith. We help companies build
+accurate AI solutions: AI-first apps, advanced workflows, and agentic systems.
+
+**[Mikael Lirbank](https://www.lirbank.com/)** — My solo practice, focused on
+web app development, test automation, code quality, and technical architecture.
+I'm around, friendly, and happy to help with the hard stuff.

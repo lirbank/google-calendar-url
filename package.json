@@ -2,40 +2,32 @@
   "name": "google-calendar-url",
   "version": "0.0.5",
   "description": "Generate shareable URLs for adding Google Calendar events",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "repository": "https://github.com/lirbank/google-calendar-url.git",
-  "author": "Mikael Lirbank",
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "google-calendar",
     "google-calendar-api",
     "calendar",
     "typescript"
   ],
+  "author": "Mikael Lirbank",
+  "license": "MIT",
+  "repository": "https://github.com/lirbank/google-calendar-url",
+  "homepage": "https://github.com/lirbank/google-calendar-url",
+  "bugs": "https://github.com/lirbank/google-calendar-url/issues",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "prepublishOnly": "yarn compile",
-    "compile": "tsc",
-    "compile:watch": "tsc --watch",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "prettier": "prettier --list-different \"**/*.{ts,json,md}\"",
-    "prettier:fix": "prettier --write \"**/*.{ts,json,md}\"",
-    "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint --ext .ts --fix src/"
+    "test": "vitest",
+    "format": "prettier --write .",
+    "release": "bun publish",
+    "prepublishOnly": "git diff-index --quiet HEAD || (echo 'Error: You have uncommitted changes' && exit 1) && tsc",
+    "postpublish": "git tag v$(bun -p \"require('./package.json').version\") && git push --tags"
   },
   "devDependencies": {
-    "@babel/core": "7.10.2",
-    "@babel/preset-env": "7.10.2",
-    "@babel/preset-typescript": "7.10.1",
-    "@types/jest": "25.2.3",
-    "babel-jest": "26.0.1",
-    "jest": "26.0.1",
     "prettier": "2.0.5",
-    "tslib": "2.0.0",
-    "typescript": "3.9.5"
+    "typescript": "^5.3.3",
+    "vitest": "^3.2.3"
   }
 }

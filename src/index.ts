@@ -18,10 +18,13 @@ export type GoogleCalendarEventArgs =
        * Start of event, acceptable formats are:
        *
        * 20200316T010000Z - UTC
+       * 2020-03-16T01:00:00Z - UTC
        *
        * 20200316T010000 - Time local to the user
+       * 2020-03-16T01:00:00 - Time local to the user
        *
        * 20200316 - All day event
+       * 2020-03-16 - All day event
        */
       start: string;
 
@@ -29,10 +32,13 @@ export type GoogleCalendarEventArgs =
        * End of event, acceptable formats are:
        *
        * 20200316T010000Z - UTC
+       * 2020-03-16T01:00:00Z - UTC
        *
        * 20200316T010000 - Time local to the user
+       * 2020-03-16T01:00:00 - Time local to the user
        *
        * 20200316 - All day event
+       * 2020-03-16 - All day event
        */
       end: string;
 
@@ -50,10 +56,13 @@ export type GoogleCalendarEventArgs =
        * Start of event, acceptable formats are:
        *
        * 20200316T010000Z - UTC
+       * 2020-03-16T01:00:00Z - UTC
        *
        * 20200316T010000 - Time local to the user
+       * 2020-03-16T01:00:00 - Time local to the user
        *
        * 20200316 - All day event
+       * 2020-03-16 - All day event
        */
       start?: never;
 
@@ -61,10 +70,13 @@ export type GoogleCalendarEventArgs =
        * End of event, acceptable formats are:
        *
        * 20200316T010000Z - UTC
+       * 2020-03-16T01:00:00Z - UTC
        *
        * 20200316T010000 - Time local to the user
+       * 2020-03-16T01:00:00 - Time local to the user
        *
        * 20200316 - All day event
+       * 2020-03-16 - All day event
        */
       end?: never;
 

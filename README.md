@@ -19,7 +19,7 @@ Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
 bun add google-calendar-url
 pnpm add google-calendar-url
 yarn add google-calendar-url
-npm install google-calendar-url --save
+npm install google-calendar-url
 ```
 
 ## Usage

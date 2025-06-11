@@ -82,8 +82,11 @@ export type GoogleCalendarEventArgs =
  * Generate a Google Calendar event URL
  */
 export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
-  const start = "start" in args ? args.start : undefined;
-  const end = "end" in args ? args.end : undefined;
+  let start = "start" in args ? args.start : undefined;
+  start = start?.replace(/\:/g, "").replace(/\-/g, "");
+
+  let end = "end" in args ? args.end : undefined;
+  end = end?.replace(/\:/g, "").replace(/\-/g, "");
 
   if (start && !end) {
     throw new Error("`end` is required when `start` is provided");

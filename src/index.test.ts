@@ -3,7 +3,7 @@ import { googleCalendarEventUrl } from ".";
 
 const baseUrl = "https://calendar.google.com/calendar/event?";
 
-test("with start and end", () => {
+test("with start and end - compact ISO 8601 format", () => {
   const eventUrl = googleCalendarEventUrl({
     start: "20200321T010000Z",
     end: "20200325T010000Z",
@@ -26,7 +26,30 @@ test("with start and end", () => {
   expect(eventUrl).toBe(expected);
 });
 
-test("local time", () => {
+test("with start and end - extended ISO 8601 format", () => {
+  const eventUrl = googleCalendarEventUrl({
+    start: "2020-03-21T01:00:00Z",
+    end: "2020-03-25T01:00:00Z",
+    title: "An event",
+    location: "San Francisco",
+    details: "Details and details",
+  });
+
+  const expected =
+    baseUrl +
+    [
+      "action=TEMPLATE",
+      "dates=20200321T010000Z%2F20200325T010000Z",
+      "text=An+event",
+      "location=San+Francisco",
+      "details=Details+and+details",
+    ].join("&");
+
+  console.log(eventUrl);
+  expect(eventUrl).toBe(expected);
+});
+
+test("local time - compact ISO 8601 format", () => {
   const eventUrl = googleCalendarEventUrl({
     start: "20200321T010000",
     end: "20200325T010000",
@@ -49,10 +72,56 @@ test("local time", () => {
   expect(eventUrl).toBe(expected);
 });
 
-test("all day", () => {
+test("local time - extended ISO 8601 format", () => {
+  const eventUrl = googleCalendarEventUrl({
+    start: "2020-03-21T01:00:00",
+    end: "2020-03-25T01:00:00",
+    title: "An event",
+    location: "San Francisco",
+    details: "Details and details",
+  });
+
+  const expected =
+    baseUrl +
+    [
+      "action=TEMPLATE",
+      "dates=20200321T010000%2F20200325T010000",
+      "text=An+event",
+      "location=San+Francisco",
+      "details=Details+and+details",
+    ].join("&");
+
+  console.log(eventUrl);
+  expect(eventUrl).toBe(expected);
+});
+
+test("all day - compact ISO 8601 format", () => {
   const eventUrl = googleCalendarEventUrl({
     start: "20200221",
     end: "20200222",
+    title: "An event",
+    location: "San Francisco",
+    details: "Details and details",
+  });
+
+  const expected =
+    baseUrl +
+    [
+      "action=TEMPLATE",
+      "dates=20200221%2F20200222",
+      "text=An+event",
+      "location=San+Francisco",
+      "details=Details+and+details",
+    ].join("&");
+
+  console.log(eventUrl);
+  expect(eventUrl).toBe(expected);
+});
+
+test("all day - extended ISO 8601 format", () => {
+  const eventUrl = googleCalendarEventUrl({
+    start: "2020-02-21",
+    end: "2020-02-22",
     title: "An event",
     location: "San Francisco",
     details: "Details and details",
@@ -136,7 +205,7 @@ test("only end date should fail", () => {
 test("malformed date should fail", () => {
   expect(() =>
     googleCalendarEventUrl({
-      start: "2020-02-21",
+      start: "2020_02_21",
       end: "20200222",
     })
   ).toThrow("`start` is malformed");
@@ -146,7 +215,7 @@ test("malformed date should fail", () => {
   expect(() =>
     googleCalendarEventUrl({
       start: "20200221",
-      end: "2020-02-22",
+      end: "2020_02_22",
     })
   ).toThrow("`end` is malformed");
 });

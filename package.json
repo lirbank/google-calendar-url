@@ -4,8 +4,9 @@
   "description": "Generate shareable URLs for adding Google Calendar events",
   "keywords": [
     "google-calendar",
-    "google-calendar-api",
-    "calendar",
+    "calendar-url",
+    "calendar-link",
+    "gcal",
     "typescript"
   ],
   "author": "Mikael Lirbank",

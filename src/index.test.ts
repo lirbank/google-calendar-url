@@ -1,5 +1,5 @@
-import { expect, test } from "vitest";
-import { googleCalendarEventUrl } from ".";
+import { expect, test, describe } from "vitest";
+import { googleCalendarEventUrl, toGoogleCalendarDate } from ".";
 
 const baseUrl = "https://calendar.google.com/calendar/event?";
 
@@ -236,4 +236,101 @@ test("mixed date formats should fail", () => {
       end: "20200325T010000",
     })
   ).toThrow("`start` and `end` must be in the same format");
+});
+
+describe("toGoogleCalendarDate", () => {
+  // Test with a specific date to ensure consistent results
+  const testDate = new Date("2024-03-21T14:30:45Z"); // March 21, 2024, 2:30:45 PM UTC
+
+  describe("allDay style", () => {
+    test("should format date as YYYYMMDD with UTC source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "utc",
+        style: "allDay",
+      });
+      expect(result).toBe("20240321");
+    });
+
+    test("should format date as YYYYMMDD with local source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "local",
+        style: "allDay",
+      });
+      expect(result).toMatch(/^\d{8}$/);
+    });
+  });
+
+  describe("floating style", () => {
+    test("should format date as YYYYMMDDTHHMMSS with UTC source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "utc",
+        style: "floating",
+      });
+      expect(result).toBe("20240321T143045");
+    });
+
+    test("should format date as YYYYMMDDTHHMMSS with local source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "local",
+        style: "floating",
+      });
+      expect(result).toMatch(/^\d{8}T\d{6}$/);
+    });
+  });
+
+  describe("instant style", () => {
+    test("should format date as YYYYMMDDTHHMMSSZ with UTC source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "utc",
+        style: "instant",
+      });
+      expect(result).toBe("20240321T143045Z");
+    });
+
+    test("should format date as YYYYMMDDTHHMMSSZ with local source", () => {
+      const result = toGoogleCalendarDate(testDate, {
+        source: "local",
+        style: "instant",
+      });
+      expect(result).toMatch(/^\d{8}T\d{6}Z$/);
+    });
+  });
+
+  describe("edge cases", () => {
+    test("should handle single digit months and days correctly", () => {
+      const earlyDate = new Date("2024-01-05T09:08:07Z"); // January 5, 2024
+      const result = toGoogleCalendarDate(earlyDate, {
+        source: "utc",
+        style: "floating",
+      });
+      expect(result).toBe("20240105T090807");
+    });
+
+    test("should handle midnight correctly", () => {
+      const midnightDate = new Date("2024-12-31T00:00:00Z");
+      const result = toGoogleCalendarDate(midnightDate, {
+        source: "utc",
+        style: "floating",
+      });
+      expect(result).toBe("20241231T000000");
+    });
+
+    test("should handle end of year correctly", () => {
+      const endOfYear = new Date("2024-12-31T23:59:59Z");
+      const result = toGoogleCalendarDate(endOfYear, {
+        source: "utc",
+        style: "instant",
+      });
+      expect(result).toBe("20241231T235959Z");
+    });
+
+    test("should handle leap year correctly", () => {
+      const leapDay = new Date("2024-02-29T12:00:00Z"); // 2024 is a leap year
+      const result = toGoogleCalendarDate(leapDay, {
+        source: "utc",
+        style: "allDay",
+      });
+      expect(result).toBe("20240229");
+    });
+  });
 });

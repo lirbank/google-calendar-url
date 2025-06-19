@@ -134,3 +134,37 @@ export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
     "https://calendar.google.com/calendar/event?" + urlSearchParams.toString()
   );
 }
+
+export type DateSource = "local" | "utc";
+export type DateStyle = "floating" | "instant" | "allDay";
+
+export interface ToGoogleCalendarDateOptions {
+  /** Where to read the clock */
+  source: DateSource;
+  /** How Google Calendar should treat it */
+  style: DateStyle;
+}
+
+/** Convert a JS Date to a Google Calendar ready string */
+export function toGoogleCalendarDate(
+  date: Date,
+  options: ToGoogleCalendarDateOptions
+): string {
+  const { source, style } = options;
+  const pad = (n: number) => n.toString().padStart(2, "0");
+
+  const y = source === "utc" ? date.getUTCFullYear() : date.getFullYear();
+  const m = pad((source === "utc" ? date.getUTCMonth() : date.getMonth()) + 1);
+  const d = pad(source === "utc" ? date.getUTCDate() : date.getDate());
+
+  if (style === "allDay") {
+    return `${y}${m}${d}`;
+  }
+
+  const hh = pad(source === "utc" ? date.getUTCHours() : date.getHours());
+  const mm = pad(source === "utc" ? date.getUTCMinutes() : date.getMinutes());
+  const ss = pad(source === "utc" ? date.getUTCSeconds() : date.getSeconds());
+  const z = style === "instant" ? "Z" : "";
+
+  return `${y}${m}${d}T${hh}${mm}${ss}${z}`;
+}

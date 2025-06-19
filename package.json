@@ -28,8 +28,8 @@
     "postpublish": "git tag v$(bun -p \"require('./package.json').version\") && git push --tags"
   },
   "devDependencies": {
-    "prettier": "2.0.5",
-    "typescript": "^5.3.3",
-    "vitest": "^3.2.3"
+    "prettier": "3.5.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

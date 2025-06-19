@@ -189,7 +189,7 @@ test("only start date should fail", () => {
     // @ts-expect-error - Testing runtime validation for invalid input
     googleCalendarEventUrl({
       start: "20200221",
-    })
+    }),
   ).toThrow("`end` is required when `start` is provided");
 });
 
@@ -198,7 +198,7 @@ test("only end date should fail", () => {
     // @ts-expect-error - Testing runtime validation for invalid input
     googleCalendarEventUrl({
       end: "20200222",
-    })
+    }),
   ).toThrow("`start` is required when `end` is provided");
 });
 
@@ -207,7 +207,7 @@ test("malformed date should fail", () => {
     googleCalendarEventUrl({
       start: "2020_02_21",
       end: "20200222",
-    })
+    }),
   ).toThrow("`start` is malformed");
 });
 
@@ -216,7 +216,7 @@ test("malformed date should fail", () => {
     googleCalendarEventUrl({
       start: "20200221",
       end: "2020_02_22",
-    })
+    }),
   ).toThrow("`end` is malformed");
 });
 
@@ -225,7 +225,7 @@ test("malformed date should fail", () => {
     googleCalendarEventUrl({
       start: "20200221Z",
       end: "20200221",
-    })
+    }),
   ).toThrow("`start` is malformed");
 });
 
@@ -234,7 +234,7 @@ test("mixed date formats should fail", () => {
     googleCalendarEventUrl({
       start: "20200321T010000Z",
       end: "20200325T010000",
-    })
+    }),
   ).toThrow("`start` and `end` must be in the same format");
 });
 

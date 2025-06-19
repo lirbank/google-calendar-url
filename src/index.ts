@@ -6,7 +6,7 @@ function clean(obj: Record<string, string | undefined>) {
     (acc, [key, val]) => {
       return val ? { ...acc, [key]: val } : acc;
     },
-    {}
+    {},
   );
 }
 
@@ -148,7 +148,7 @@ export interface ToGoogleCalendarDateOptions {
 /** Convert a JS Date to a Google Calendar ready string */
 export function toGoogleCalendarDate(
   date: Date,
-  options: ToGoogleCalendarDateOptions
+  options: ToGoogleCalendarDateOptions,
 ): string {
   const { source, style } = options;
   const pad = (n: number) => n.toString().padStart(2, "0");

@@ -12,7 +12,7 @@ function clean(obj: Record<string, string | undefined>) {
 
 const datePattern = /^\d{8}(T\d{6}Z?)?$/;
 
-export type GoogleCalendarEventArgs =
+export type GoogleCalendarEventUrlOptions =
   | {
       /**
        * Start of event, acceptable formats are:
@@ -93,11 +93,11 @@ export type GoogleCalendarEventArgs =
 /**
  * Generate a Google Calendar event URL
  */
-export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
-  let start = "start" in args ? args.start : undefined;
+export function googleCalendarEventUrl(options: GoogleCalendarEventUrlOptions) {
+  let start = "start" in options ? options.start : undefined;
   start = start?.replace(/\:/g, "").replace(/\-/g, "");
 
-  let end = "end" in args ? args.end : undefined;
+  let end = "end" in options ? options.end : undefined;
   end = end?.replace(/\:/g, "").replace(/\-/g, "");
 
   if (start && !end) {
@@ -123,9 +123,9 @@ export function googleCalendarEventUrl(args: GoogleCalendarEventArgs) {
   const searchParams = {
     action: "TEMPLATE",
     dates: start && end ? `${start}/${end}` : undefined,
-    text: args.title,
-    location: args.location,
-    details: args.details,
+    text: options.title,
+    location: options.location,
+    details: options.details,
   };
 
   const urlSearchParams = new URLSearchParams(clean(searchParams));

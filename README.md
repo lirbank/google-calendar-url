@@ -1,17 +1,12 @@
-# google-calendar-url
+# Google Calendar URL
 
 Generate shareable URLs for adding Google Calendar events.
 
 ## Features
 
-Written in TypeScript and includes type definitions.
-
-- No dependencies
-- Works with vanilla JavaScript and
-  [TypeScript](https://www.typescriptlang.org/)
-- Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
-
-Try it in a [CodeSandbox](https://codesandbox.io/s/google-calendar-url-fbvyr).
+- 📦 **No dependencies** - Lightweight and self-contained
+- 🛡️ **TypeScript native** - Written in TypeScript with strict type definitions
+- 🌐 **Universal compatibility** - Works with JavaScript and TypeScript
 
 ## Installation
 
@@ -27,7 +22,8 @@ npm install google-calendar-url
 ```ts
 import { googleCalendarEventUrl } from "google-calendar-url";
 
-const url = googleCalendarEventUrl({
+// Compact ISO 8601 format
+googleCalendarEventUrl({
   start: "20201212T100000Z",
   end: "20201212T110000Z",
   title: "Event title",
@@ -35,80 +31,72 @@ const url = googleCalendarEventUrl({
   location: "San Francisco",
 });
 
-console.log(url);
+// Extended ISO 8601 format
+googleCalendarEventUrl({
+  start: "2020-12-12T10:00:00Z",
+  end: "2020-12-12T11:00:00Z",
+  title: "Event title",
+  details: "Event details",
+  location: "San Francisco",
+});
 
+// Output (same for both):
 // https://calendar.google.com/calendar/event?action=TEMPLATE&dates=20201212T100000Z%2F20201212T110000Z&text=Event+title&details=Event+details&location=San+Francisco
 ```
 
 [Try the URL ](https://calendar.google.com/calendar/event?action=TEMPLATE&dates=20201212T100000Z%2F20201212T110000Z&text=Event+title&details=Event+details&location=San+Francisco)
 
-## API
+## Helper function
 
-The `googleCalendarEventUrl` function takes a single `GoogleCalendarEventArgs`
-argument.
+The `toGoogleCalendarDate()` helper converts JavaScript `Date` objects to Google Calendar date strings.
 
 ```ts
-interface GoogleCalendarEventArgs {
-  /**
-   * Start of event, acceptable formats are:
-   *
-   * 20200316T010000Z - UTC
-   *
-   * 20200316T010000 - Time local to the user
-   *
-   * 20200316 - All day event
-   */
-  start?: string;
+import { toGoogleCalendarDate } from "google-calendar-url";
 
-  /**
-   * End of event, acceptable formats are:
-   *
-   * 20200316T010000Z - UTC
-   *
-   * 20200316T010000 - Time local to the user
-   *
-   * 20200316 - All day event
-   */
-  end?: string;
+const date = new Date("2024-03-21T14:30:45Z");
 
-  /** Event title */
-  title?: string;
+// All-day event
+toGoogleCalendarDate(date, { source: "utc", style: "allDay" });
+// "20240321"
 
-  /** Event location */
-  location?: string;
+// Time in user's local timezone (floating)
+toGoogleCalendarDate(date, { source: "local", style: "floating" });
+// "20240321T143045" (varies by timezone)
 
-  /** Event details */
-  details?: string;
-}
+// UTC time (instant)
+toGoogleCalendarDate(date, { source: "utc", style: "instant" });
+// "20240321T143045Z"
+
+googleCalendarEventUrl({
+  start: toGoogleCalendarDate(date, { source: "utc", style: "allDay" }),
+  end: toGoogleCalendarDate(date, { source: "utc", style: "allDay" }),
+  title: "Event title",
+  details: "Event details",
+  location: "San Francisco",
+});
 ```
+
+**Options:**
+
+- `source`: `"utc"` | `"local"` - Whether to read the date in UTC or local time
+- `style`: `"allDay"` | `"floating"` | `"instant"` - How Google Calendar should interpret the date
 
 ## References
 
-- [Inofficial spec](https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs/blob/master/services/google.md)
-
-## Maintainers
-
-- [@lirbank](https://github.com/lirbank)
+- [Unofficial spec](https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs/blob/master/services/google.md)
 
 ## Contributing
 
-Contributions are welcome! Please open issues or pull requests on
-[GitHub](https://github.com/starmode-base/neon-testing/pulls).
+Contributions are welcome! Please open issues or pull requests on [GitHub](https://github.com/lirbank/google-calendar-url/pulls).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
-for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Need expert help?
 
-I take on a few consulting projects each year where I can build, unblock, and
-ship.
+Hi, I'm [@lirbank](https://github.com/lirbank). I take on a few consulting projects each year where I help companies build, unblock, and ship. Here's what I do:
 
-**[STΛR MODΞ](https://www.starmode.dev/)** — The AI development studio I run
-with AI/ML expert and data scientist Spencer Smith. We help companies build
-accurate AI solutions: AI-first apps, advanced workflows, and agentic systems.
+**[STΛR MODΞ](https://www.starmode.dev/)** — A boutique AI development studio I run with AI/ML expert and data scientist [@spencer-g-smith](https://github.com/spencer-g-smith). We help companies build accurate AI solutions: AI-first apps, advanced workflows, and agentic systems.
 
-**[Mikael Lirbank](https://www.lirbank.com/)** — My solo practice, focused on
-web app development, test automation, code quality, and technical architecture.
-I'm around, friendly, and happy to help with the hard stuff.
+**[Mikael Lirbank](https://www.lirbank.com/)** — My solo practice, focused on web app development, test automation, code quality, and technical architecture. I'm friendly and happy to help with the hard stuff.
